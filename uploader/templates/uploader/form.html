@@ -10,11 +10,23 @@
         <h5>Assignatura:</h5>
         <input type="text" name="assignatura" required>
 
-        <h5>Tipus de document:</h5>
-        <select id="show" name="show" required>
+        <h5>Any:</h5>
+        <!--<h6>Exemple: al curs "2018_19" li correspon "18".</h6>-->
+        <select id="any" name="any" required>
             <option value="none" selected="selected">---</option>
-            <option value="Apunts">Apunts</option>
+            {% for c in courses %}
+            <!--<option value='{{ c|slice:":4" }}'>{{ c }}</option>-->
+            <option value='{{ first_year|add:forloop.counter|add:-1 }}'>{{ c }}</option>
+            {% endfor %}
+        </select>
+
+        <h5>Tipus de document:</h5>
+        <select id="document" name="document" required>
+            <option value="none" selected="selected">---</option>
             <option value="Examen">Examen</option>
+            <option value="Apunts">Apunts</option>
+            <option value="Resum">Resum</option>
+            <option value="Formulari">Formulari</option>
         </select>
 
         <div id="Examen">
