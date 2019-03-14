@@ -1,6 +1,49 @@
 {% extends "uploader/header.html" %}
 
 {% block content %}
-<h2>Welcome!</h2>
-<p>Hello, world!</p>
+    <h1>Puja exàmens i apunts</h1>
+    <h6>Mida màxima: 512 MB.</h6>
+    <h6>Formats permesos: pdf.</h6>
+    <br>
+
+    <form method="post" action="" id="uploader" name="uploader" enctype="multipart/form-data">
+        <h5>Assignatura:</h5>
+        <input type="text" name="assignatura" required>
+
+        <h5>Tipus de document:</h5>
+        <select id="show" name="show" required>
+            <option value="none" selected="selected">---</option>
+            <option value="Apunts">Apunts</option>
+            <option value="Examen">Examen</option>
+        </select>
+
+        <div id="Examen">
+            <h5>Tipus d'examen:</h5>
+            <select id="ParcialOFinal" name="ParcialOFinal" required>
+                <option selected="selected">---</option>
+                <option value="Parcial">Parcial</option>
+                <option value="Final">Final</option>
+            </select>
+            <p></p>
+            <select id="TipusExamen" name="TipusExamen" required>
+                <option selected="selected">---</option>
+                <option value="Problemes">Problemes</option>
+                <option value="Test">Test</option>
+                <option value="Mixt">Mixt</option>
+                <option value="Lab">Laboratori</option>
+                <option value="Reav">Reavaluació</option>
+            </select>
+		</div>
+        <br>
+        <h5>Selecciona un fitxer:</h5>
+        <input type="file" name="fileToUpload" id="fileToUpload" required>
+
+        <br>
+        <br>
+
+        <div>
+            <input type="submit" name="submit" value="Enviar" >
+            <input type="reset" value="Reiniciar" onClick="amaga();">
+        </div>
+    </form>
 {% endblock %}

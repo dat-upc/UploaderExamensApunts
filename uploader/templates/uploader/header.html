@@ -1,11 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>DAT - UPC</title>
+    <title>Exàmens i apunts | DAT - UPC</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-theme.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'uploader/css/style.css' %}" type="text/css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'uploader/js/document.js' %}" async></script>
+    <script type="text/javascript" src="{% static 'uploader/js/amaga.js' %}" async></script>
 </head>
-<body class="body">
-    <div>
+<body>
+    <div class="container margin-v-big">
         {% block content %}
         {% endblock %}
     </div>
