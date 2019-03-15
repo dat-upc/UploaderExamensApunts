@@ -1,11 +1,11 @@
-var anterior = "#" + $("#show option:selected").val();
+var anterior = "#" + $("#document option:selected").val();
 $(anterior).show();
 var actual = "";
 
-$("#show").change(function() {
+$("#document").change(function() {
     $("#ParcialOFinal").val("---");
     $("#TipusExamen").val("---");
-    actual = "#" + $("#show option:selected").val();
+    actual = "#" + $("#document option:selected").val();
 
     $(anterior).hide();
     $(actual).show();

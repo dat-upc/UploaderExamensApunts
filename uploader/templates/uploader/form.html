@@ -18,6 +18,15 @@
             {% endfor %}
         </select>
 
+        <h5>Quadrimestre:</h5>
+        <select id="quadri" name="quadri" required>
+            <option selected="selected">---</option>
+            <option value="Tardor">Tardor</option>
+            <option value="Primavera">Primavera</option>
+        </select>
+
+        <!--Date is calculated by the system as current date. Don't need to add here.-->
+
         <h5>Tipus de document:</h5>
         <select id="document" name="document" required>
             <option value="none" selected="selected">---</option>
@@ -44,6 +53,16 @@
                 <option value="Reav">Reavaluació</option>
             </select>
 		</div>
+
+        <h5>Nom i cognoms professor:</h5>
+        <input type="text" name="professor" required>
+
+        <h5>Nom i cognoms alumne:</h5>
+        <input type="text" name="alumne" required>
+
+        <h5>Correu-e alumne:</h5>
+        <input type="email" name="email" required>
+
         <br>
         <h5>Selecciona un fitxer:</h5>
         <input type="file" name="fileToUpload" id="fileToUpload" required>
