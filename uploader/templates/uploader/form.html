@@ -10,6 +10,15 @@
         <h5>Assignatura:</h5>
         <input type="text" name="assignatura" required>
 
+        <h5>Nom i cognoms professor:</h5>
+        <input type="text" name="professor" required>
+
+        <h5>Nom i cognoms alumne:</h5>
+        <input type="text" name="alumne" required>
+
+        <h5>Correu-e alumne:</h5>
+        <input type="email" name="email" required>
+
         <h5>Any:</h5>
         <select id="any" name="any" required>
             <option value="none" selected="selected">---</option>
@@ -26,6 +35,7 @@
         </select>
 
         <!--Date is calculated by the system as current date. Don't need to add here.-->
+        <br>
 
         <h5>Tipus de document:</h5>
         <select id="document" name="document" required>
@@ -52,20 +62,15 @@
                 <option value="Lab">Laboratori</option>
                 <option value="Reav">Reavaluació</option>
             </select>
+            <p></p>
+            Solució: <input type="checkbox" name="solucio" value="solucio">
 		</div>
 
-        <h5>Nom i cognoms professor:</h5>
-        <input type="text" name="professor" required>
-
-        <h5>Nom i cognoms alumne:</h5>
-        <input type="text" name="alumne" required>
-
-        <h5>Correu-e alumne:</h5>
-        <input type="email" name="email" required>
-
-        <br>
-        <h5>Selecciona un fitxer:</h5>
-        <input type="file" name="fileToUpload" id="fileToUpload" required>
+        <div id="upload">
+            <br>
+            <h5>Selecciona un fitxer:</h5>
+            <input type="file" name="fileToUpload" id="fileToUpload" required>
+        </div>
 
         <br>
         <br>

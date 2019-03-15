@@ -14,12 +14,10 @@
 	padding-right: 0;
 	padding-left: 0;
 }
-body
-{
+body {
 	padding: 30px
 }
-form
-{
+form {
 	display: block;
 	margin: 20px auto;
 	background: #eee;
