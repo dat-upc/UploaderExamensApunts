@@ -13,7 +13,6 @@ def upload(request):
         if (form.is_valid()):
             # It never enters here. Why?
             # Do stuff.
-            #return render(request, 'uploader/sucess.html')
             return render(request, 'uploader/success.html')
         return render(request, 'uploader/error.html', {'error': "Les dades introduïdes no són vàlides."})
     else:
