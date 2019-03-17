@@ -1,10 +1,9 @@
-var anterior = "#" + $("#id_document option:selected").val();
-$(anterior).show();
-var actual = "";
+var anterior;
+var actual;
 
 $("#id_document").change(function() {
-    $("#parcial_final").val("---");
-    $("#tipus_examen").val("---");
+    $("#id_parcial_final").val("");
+    $("#id_tipus_examen").val("");
     actual = "#" + $("#id_document option:selected").val();
 
     $(anterior).hide();
@@ -12,4 +11,3 @@ $("#id_document").change(function() {
     anterior = actual;
     actual = "";
 });
- 

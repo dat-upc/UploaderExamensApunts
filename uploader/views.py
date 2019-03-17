@@ -10,10 +10,11 @@ def index(request):
 def upload(request):
     if (request.method == "POST"):
         form = UploadForm(request.POST)
+        #print (form.errors) # Display the form errors for debugging purposes.
         if (form.is_valid()):
-            # It never enters here. Why?
-            # Do stuff.
-            return render(request, 'uploader/success.html')
-        return render(request, 'uploader/error.html', {'error': "Les dades introduïdes no són vàlides."})
+            form.save() # Save the form to the database.
+            return render(request, 'uploader/success.html') # Say thank you to the uploader.
+        else:
+            return render(request, 'uploader/error.html', {'error': "Les dades introduïdes no són vàlides."})
     else:
         return render(request, 'uploader/error.html', {'error': "No s'han introduït dades."})

@@ -1,4 +1,11 @@
 {% extends "uploader/header.html" %}
+
+{% block scripts %}
+{% load staticfiles %}
+<script type="text/javascript" src="{% static 'uploader/js/document.js' %}" async></script>
+<script type="text/javascript" src="{% static 'uploader/js/amaga.js' %}" async></script>
+{% endblock %}
+
 {% block content %}
 <h1>Puja exàmens i apunts</h1>
     <h6>Mida màxima: 512 MB.</h6>
