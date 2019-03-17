@@ -1,5 +1,6 @@
 from django.db import models
-from django.core.validators import FileExtensionValidator
+from .utils.formatChecker import ContentTypeRestrictedFileField
+from UploaderExamensApunts.settings import MAX_FILE_SIZE
 import datetime
 
 class Upload(models.Model):
@@ -45,8 +46,4 @@ class Upload(models.Model):
     parcial_final = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+PARCIAL_FINAL, blank=True, null=True)
     tipus_examen = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+EXAM_TYPES, blank=True, null=True)
     solucio = models.BooleanField(default=False)
-    file_upload = models.FileField(upload_to="tmp", null=True, validators=[FileExtensionValidator(allowed_extensions=['pdf'])])
-
-    # TODO
-    def __str__(self):
-        pass
+    file_upload = ContentTypeRestrictedFileField(upload_to="tmp", content_types=['application/pdf'], max_upload_size=MAX_FILE_SIZE, null=True, blank=True)

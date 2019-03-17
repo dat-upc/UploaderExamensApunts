@@ -8,7 +8,7 @@
 
 {% block content %}
 <h1>Puja exàmens i apunts</h1>
-    <h6>Mida màxima: 512 MB.</h6>
+    <h6>Mida màxima: {{ MAX_FILE_SIZE }} MB.</h6>
     <h6>Formats permesos: pdf.</h6>
 <br>
 <form method="post" action="/upload/" id="uploader" name="uploader" enctype="multipart/form-data">

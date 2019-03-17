@@ -128,3 +128,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 MEDIA_ROOT = '/home/uploader/uploads/'
+
+MAX_FILE_SIZE = 536870912

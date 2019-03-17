@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from uploader.forms import UploadForm
+from UploaderExamensApunts.settings import MAX_FILE_SIZE
 
 def index(request):
     form = UploadForm()
-    return render(request, 'uploader/form.html', {'form': form})
+    return render(request, 'uploader/form.html', {'form': form, 'MAX_FILE_SIZE': MAX_FILE_SIZE//1024//1024})
 
 def upload(request):
     if (request.method == "POST"):
