@@ -42,6 +42,7 @@ class Upload(models.Model):
     document = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+DOCUMENTS)
     parcial_final = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+PARCIAL_FINAL, blank=True, null=True)
     tipus_examen = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+EXAM_TYPES, blank=True, null=True)
+    solucio = models.BooleanField(default=False)
 
     # TODO
     def __str__(self):
