@@ -40,8 +40,8 @@ class Upload(models.Model):
     any = models.CharField(max_length=1, choices=EMPTY+YEARS)
     quadrimestre = models.CharField(max_length=1, choices=EMPTY+SEMESTER)
     document = models.CharField(max_length=1, choices=EMPTY+DOCUMENTS)
-    parcial_final = models.CharField(max_length=1, choices=EMPTY+PARCIAL_FINAL)
-    tipus_examen = models.CharField(max_length=1, choices=EMPTY+EXAM_TYPES)
+    parcial_final = models.CharField(max_length=1, choices=EMPTY+PARCIAL_FINAL, blank=True, null=True)
+    tipus_examen = models.CharField(max_length=1, choices=EMPTY+EXAM_TYPES, blank=True, null=True)
 
     # TODO
     def __str__(self):
