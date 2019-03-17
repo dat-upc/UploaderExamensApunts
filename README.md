@@ -1,9 +1,12 @@
-# UploaderExamensApunts
-Webapp to upload exams, notes, etc. to the website.
+# Description
+This repository contains a webapp used to upload exams, notes and other materials to the DAT (Delegació d'Alumnes de Telecomunicacions) website. It is developed using Python3 and the Django framework.
 
-## Installation ##
-### Development ###
-This installation notes are for a development environment. For a production environment please see the *nginx* section below.
+# Source code
+All the files in this repository are licensed under the **GNU General Public License 3**, or any later version.
+
+# Installation #
+## Development ##
+This installation notes are for a development environment. For a production environment please see the **Production** section below.
 
 1. Install required software:
 ```
@@ -44,6 +47,7 @@ python3 manage.py migrate
 python3 manage.py runserver <IP>:<PORT>
 ```
 
+## Production ##
 ### nginx ###
 1. Follow steps 1-4 from the previous section.
 2. 
