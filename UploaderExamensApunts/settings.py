@@ -36,7 +36,7 @@ ALLOWED_HOSTS = ["192.168.33.10"] # My Vagrant guest IP.
 # Application definition
 
 INSTALLED_APPS = [
-    'uploader',
+    'uploader.apps.UploaderConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
