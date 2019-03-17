@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import FileExtensionValidator
 import datetime
 
 class Upload(models.Model):
@@ -33,6 +34,7 @@ class Upload(models.Model):
         ("Reav", "Reavaluació")
     ]
 
+    upload_date = models.DateField(default=datetime.datetime.today().strftime('%Y-%m-%d'))
     assignatura = models.CharField(max_length=MAX_LENGTH)
     professor = models.CharField(max_length=MAX_LENGTH)
     alumne = models.CharField(max_length=MAX_LENGTH)
@@ -43,6 +45,7 @@ class Upload(models.Model):
     parcial_final = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+PARCIAL_FINAL, blank=True, null=True)
     tipus_examen = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+EXAM_TYPES, blank=True, null=True)
     solucio = models.BooleanField(default=False)
+    file_upload = models.FileField(upload_to="tmp", null=True, validators=[FileExtensionValidator(allowed_extensions=['pdf'])])
 
     # TODO
     def __str__(self):
