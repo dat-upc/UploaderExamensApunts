@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+from .constants import *
 try:
     from .settings_secret import *
 except:
@@ -127,6 +128,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = '/home/uploader/uploads/'
-
-MAX_FILE_SIZE = 536870912
+MEDIA_ROOT = MEDIA_ROOT_SAVED
