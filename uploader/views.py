@@ -22,6 +22,6 @@ def upload(request):
 
 # TODO
 '''
-- The file musn't be saved straightaway, its name should be changed according to the patron
+- The file musn't be saved straightaway, its name should be changed according to the pattern
     and the information provided by the user.
 '''
