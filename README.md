@@ -38,6 +38,8 @@ During this step you should follow the instructions in `UploaderExamensApunts/se
 ```
 git clone https://github.com/dat-upc/UploaderExamensApunts.git
 cd UploaderExamensApunts
+mkdir uploader/migrations
+touch uploader/migrations/__init__.py
 python3 manage.py makemigrations
 python3 manage.py migrate
 ```
