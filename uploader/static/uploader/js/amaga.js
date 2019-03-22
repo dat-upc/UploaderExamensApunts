@@ -1,4 +1,4 @@
 function amaga() {
-    $("#Examen").hide();
+    $("#examen").hide();
 }
 amaga(); 
