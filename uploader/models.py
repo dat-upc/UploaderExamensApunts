@@ -48,3 +48,4 @@ class Upload(models.Model):
     tipus_examen = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+EXAM_TYPES, blank=True, null=True)
     solucio = models.BooleanField(default=False)
     file_upload = ContentTypeRestrictedFileField(upload_to=change_name, content_types=CONTENT_TYPES, max_upload_size=MAX_FILE_SIZE, null=True, blank=True)
+    is_correct = models.BooleanField(default=False)
