@@ -1,10 +1,8 @@
 from django.db import models
 from django.utils import timezone
-from django.db.models.signals import pre_delete
-from django.dispatch.dispatcher import receiver
 from .utils.format_checker import ContentTypeRestrictedFileField
-from UploaderExamensApunts.constants import *
 from .utils.change_name import change_name
+from UploaderExamensApunts.constants import *
 import datetime
 
 class Upload(models.Model):
@@ -51,9 +49,3 @@ class Upload(models.Model):
     solucio = models.BooleanField(default=False)
     file_upload = ContentTypeRestrictedFileField(upload_to=change_name, content_types=CONTENT_TYPES, max_upload_size=MAX_FILE_SIZE, null=True, blank=True)
     is_correct = models.BooleanField(default=False)
-
-# Delete the file when it is deleted from the admin panel.
-@receiver(pre_delete, sender=Upload)
-def mymodel_delete(sender, instance, **kwargs):
-    # Pass false so FileField doesn't save the model.
-    instance.file_upload.delete(False)
