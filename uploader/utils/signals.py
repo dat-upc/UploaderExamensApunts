@@ -18,6 +18,7 @@ def move_file(sender, instance, **kwargs):
         pass
     # TODO
 
+# Change the file name if an admin makes some changes.
 @receiver(post_save, sender=Upload)
 def rename(sender, instance, **kwargs):
     # Absolute path to the file.
