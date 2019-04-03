@@ -25,13 +25,11 @@ def rename(sender, instance, **kwargs):
     new_name = os.path.join(MEDIA_ROOT_SAVED, change_name(instance, os.path.basename(old_name)))
 
     # Check if the name has changed.
-    if old_name != new_name and not kwargs.get('created'):
-        if not hasattr(instance, '_dirty'):
-            instance.file_upload.name = os.path.join(REL_TMP_DIR, os.path.basename(new_name))
-
-            try:
-                instance._dirty = True
-                instance.save()
-                os.rename(old_name, new_name)
-            finally:
-                del instance._dirty
+    if old_name != new_name and not kwargs.get('created') and not hasattr(instance, '_dirty'):
+        instance.file_upload.name = os.path.join(REL_TMP_DIR, os.path.basename(new_name))
+        try:
+            instance._dirty = True
+            instance.save()
+            os.rename(old_name, new_name)
+        finally:
+            del instance._dirty
