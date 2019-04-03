@@ -1,4 +1,4 @@
-from django.db.models.signals import pre_delete, pre_save
+from django.db.models.signals import pre_delete, post_save, pre_save
 from django.dispatch.dispatcher import receiver
 from uploader.models import Upload
 from .change_name import change_name
@@ -18,15 +18,20 @@ def move_file(sender, instance, **kwargs):
         pass
     # TODO
 
-@receiver(pre_save, sender=Upload)
+@receiver(post_save, sender=Upload)
 def rename(sender, instance, **kwargs):
     # Absolute path to the file.
     old_name = os.path.join(MEDIA_ROOT_SAVED, str(instance.file_upload))
-    new_name = os.path.join(MEDIA_ROOT_SAVED, change_name(instance, old_name))
+    new_name = os.path.join(MEDIA_ROOT_SAVED, change_name(instance, os.path.basename(old_name)))
 
     # Check if the name has changed.
-    if old_name != new_name:
-        pass
-        #os.rename(old_name, new_name)
-        # The database should be updated too.
-    # TODO
+    if old_name != new_name and not kwargs.get('created'):
+        if not hasattr(instance, '_dirty'):
+            instance.file_upload.name = os.path.join(REL_TMP_DIR, os.path.basename(new_name))
+
+            try:
+                instance._dirty = True
+                instance.save()
+                os.rename(old_name, new_name)
+            finally:
+                del instance._dirty

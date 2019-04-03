@@ -19,9 +19,3 @@ def upload(request):
     else:
         return render(request, 'uploader/error.html', {'error': "No s'han introduït dades.",
                                                        "error_info": ""})
-
-# TODO
-'''
-- The file musn't be saved straightaway, its name should be changed according to the pattern
-    and the information provided by the user.
-'''
