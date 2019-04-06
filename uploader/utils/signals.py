@@ -1,4 +1,4 @@
-from django.db.models.signals import pre_delete, post_save, pre_save
+from django.db.models.signals import pre_delete, post_save
 from django.dispatch.dispatcher import receiver
 from uploader.models import Upload
 from .change_name import change_name
@@ -11,26 +11,29 @@ def uploader_delete(sender, instance, **kwargs):
     # Pass false so FileField doesn't save the model.
     instance.file_upload.delete(False)
 
-# Move the file to the permanent destination.
-@receiver(pre_save, sender=Upload)
-def move_file(sender, instance, **kwargs):
-    if instance.is_correct and REL_TMP_DIR in instance.file_upload.name:
-        pass
-    # TODO
-
 # Change the file name if an admin makes some changes.
 @receiver(post_save, sender=Upload)
 def rename(sender, instance, **kwargs):
     # Absolute path to the file.
     old_name = os.path.join(MEDIA_ROOT_SAVED, instance.file_upload.name)
-    new_name = os.path.join(MEDIA_ROOT_SAVED, change_name(instance, os.path.basename(old_name)))
+    if instance.is_correct:
+        new_name = os.path.join(ABS_FINAL_DIR, os.path.basename(change_name(instance, os.path.basename(old_name))))
+        created = False
+        dest_dir = REL_FINAL_DIR
+    else:
+        new_name = os.path.join(MEDIA_ROOT_SAVED, change_name(instance, os.path.basename(old_name)))
+        created = kwargs.get('created')
+        dest_dir = REL_TMP_DIR
 
     # Check if the name has changed.
-    if old_name != new_name and not kwargs.get('created') and not hasattr(instance, '_dirty'):
-        instance.file_upload.name = os.path.join(REL_TMP_DIR, os.path.basename(new_name))
+    if old_name != new_name and not created and not hasattr(instance, '_dirty'):
+        instance.file_upload.name = os.path.join(dest_dir, os.path.basename(new_name))
         try:
             instance._dirty = True
             instance.save()
+            # Check if the destination directory exists.
+            if not os.path.exists(os.path.dirname(new_name)):
+                os.makedirs(os.path.dirname(new_name))
             os.rename(old_name, new_name)
         finally:
             del instance._dirty
