@@ -14,7 +14,7 @@ def uploader_delete(sender, instance, **kwargs):
 # Move the file to the permanent destination.
 @receiver(pre_save, sender=Upload)
 def move_file(sender, instance, **kwargs):
-    if instance.is_correct:
+    if instance.is_correct and REL_TMP_DIR in instance.file_upload.name:
         pass
     # TODO
 
@@ -22,7 +22,7 @@ def move_file(sender, instance, **kwargs):
 @receiver(post_save, sender=Upload)
 def rename(sender, instance, **kwargs):
     # Absolute path to the file.
-    old_name = os.path.join(MEDIA_ROOT_SAVED, str(instance.file_upload))
+    old_name = os.path.join(MEDIA_ROOT_SAVED, instance.file_upload.name)
     new_name = os.path.join(MEDIA_ROOT_SAVED, change_name(instance, os.path.basename(old_name)))
 
     # Check if the name has changed.
