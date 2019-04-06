@@ -13,7 +13,7 @@ def uploader_delete(sender, instance, **kwargs):
 
 # Change the file name if an admin makes some changes.
 @receiver(post_save, sender=Upload)
-def rename(sender, instance, **kwargs):
+def move_file(sender, instance, **kwargs):
     # Absolute path to the file.
     old_name = os.path.join(MEDIA_ROOT_SAVED, instance.file_upload.name)
     if instance.is_correct:
