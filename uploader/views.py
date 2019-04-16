@@ -9,7 +9,6 @@ def index(request):
 def upload(request):
     if (request.method == "POST"):
         form = UploadForm(request.POST, request.FILES)
-        print (form.errors) # Display the form errors for debugging purposes.
         if (form.is_valid()):
             form.save() # Save the form to the database.
             return render(request, 'uploader/success.html') # Say thank you to the uploader.

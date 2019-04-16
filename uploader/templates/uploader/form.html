@@ -17,6 +17,9 @@
 <form method="post" action="/upload/" id="uploader" name="uploader" enctype="multipart/form-data">
     {% csrf_token %}
 
+    <h5>Grau:</h5>
+    {{ form.grau }}
+
     <h5>Assignatura (sigles):</h5>
     {{ form.assignatura }}
 

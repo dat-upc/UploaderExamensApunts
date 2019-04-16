@@ -14,6 +14,11 @@ class Upload(models.Model):
         (str(x) + "_" + str((x+1)%100), str(x) + "-" + str(x + 1)) for x in range(FIRST_YEAR, datetime.datetime.now().year if (
                 datetime.datetime.now().month < 9) else datetime.datetime.now().year + 1)
     ]
+    DEGREES = [
+        ("GR15", "Grau en Enginyeria de Tecnologies i Serveis de Telecomunicació"),
+        ("GREE", "Grau en Enginyeria Electrònica de Telecomunicació"),
+        ("GREF", "Grau en Enginyeria Física"),
+    ]
     SEMESTER = [
         ("primavera", "Primavera"),
         ("tardor", "Tardor"),
@@ -33,10 +38,11 @@ class Upload(models.Model):
         ("test", "Test"),
         ("mixt", "Mixt"),
         ("laboratori", "Laboratori"),
-        ("reavaluacio", "Reavaluació")
+        ("reavaluacio", "Reavaluació"),
     ]
 
     upload_date = models.DateField(default=timezone.now)
+    grau = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+DEGREES)
     assignatura = models.CharField(max_length=MAX_LENGTH)
     professor = models.CharField(max_length=MAX_LENGTH)
     alumne = models.CharField(max_length=MAX_LENGTH)
