@@ -17,9 +17,9 @@ def move_file(sender, instance, **kwargs):
     # Absolute path to the file.
     old_name = os.path.join(MEDIA_ROOT_SAVED, instance.file_upload.name)
     if instance.is_correct:
-        new_name = os.path.join(ABS_FINAL_DIR, os.path.basename(change_name(instance, os.path.basename(old_name))))
+        new_name = os.path.join(ABS_FINAL_DIR, instance.grau, os.path.basename(change_name(instance, os.path.basename(old_name))))
         created = False
-        dest_dir = REL_FINAL_DIR
+        dest_dir = os.path.join(REL_FINAL_DIR, instance.grau)
     else:
         new_name = os.path.join(MEDIA_ROOT_SAVED, change_name(instance, os.path.basename(old_name)))
         created = kwargs.get('created')
