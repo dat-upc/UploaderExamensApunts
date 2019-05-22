@@ -86,6 +86,7 @@ DATABASES = {
         'NAME': DATABASE_MYSQL,
         'USER': USER_NAME,
         'PASSWORD': PASSWORD,
+        'HOST': HOST,
     }
 }
 
