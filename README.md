@@ -8,7 +8,7 @@ All the files in this repository are licensed under the **GNU Affero General Pub
 ## Development ##
 This installation notes are for a development environment. For a production environment please see the **Production** section below.
 
-1. Create the file UploaderExamensApunts/settings_secret.readme:
+1. Create the file `UploaderExamensApunts/settings_secret.readme`:
 ```python
 SECRET_KEY_SAVED='SECRET_KEY'
 DATABASE_MYSQL="dat_uploader"
@@ -17,17 +17,23 @@ PASSWORD="password"
 HOST='127.0.0.1'
 ```
 
-2. Install required software:
+2. Create `uploader/migrations/__init__.py`:
+```bash
+mkdir uploader/migrations
+touch uploader/migrations/__init__.py
+```
+
+3. Install required software:
 ```
 sudo apt install docker.io
 ```
 
-3. Build the Docker image:
+4. Build the Docker image:
 ```
 docker build --tag=dat-uploader .
 ```
 
-4. Create the container:
+5. Create the container:
 
 ```
 docker run -it -p 8000:8000 -v $(pwd):/app dat-uploader
