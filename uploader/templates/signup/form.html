@@ -1,0 +1,29 @@
+{% extends "signup/header.html" %}
+
+{% block content %}
+<h1>Dona't d'alta</h1>
+    <h4>Si ja estàs registrat fes clic <a href="/">aquí</a>.</h4>
+<br>
+<form method="post" action="/signup/" id="signup" name="signup">
+    {% csrf_token %}
+
+    <h5>Nom:</h5>
+    {{ form.nom }}
+
+    <h5>DNI/NIE:</h5>
+    {{ form.dni }}
+
+    <h5>Correu-e:</h5>
+    {{ form.email }}
+
+    <br>
+    <br>
+    {{ form.captcha }}
+
+    <br>
+    <br>
+    <div>
+        <input type="submit" name="submit" value="Enviar" >
+    </div>
+</form>
+{% endblock %}

@@ -5,6 +5,14 @@ from .utils.change_name import change_name
 from UploaderExamensApunts.constants import *
 import datetime
 
+class Person(models.Model):
+    MAX_LENGTH = 100
+    nom = models.CharField(max_length=MAX_LENGTH)
+    email = models.EmailField(max_length=MAX_LENGTH, unique=True)
+    dni = models.CharField(max_length=MAX_LENGTH, unique=True, verbose_name="DNI/NIE")
+    punts_capsa = models.PositiveIntegerField(default=0)
+
+
 class Upload(models.Model):
     MAX_LENGTH = 100
     EMPTY = [
@@ -46,8 +54,6 @@ class Upload(models.Model):
     grau = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+DEGREES)
     assignatura = models.CharField(max_length=MAX_LENGTH)
     professor = models.CharField(max_length=MAX_LENGTH)
-    alumne = models.CharField(max_length=MAX_LENGTH)
-    email = models.EmailField(max_length=MAX_LENGTH)
     dni = models.CharField(max_length=MAX_LENGTH)
     curs = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+YEARS)
     quadrimestre = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+SEMESTER)

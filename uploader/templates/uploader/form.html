@@ -8,6 +8,7 @@
 
 {% block content %}
 <h1>Puja exàmens i apunts</h1>
+    <h4>Si no estàs registrat fes clic <a href="/signup">aquí</a>.</h4>
     <h6>Mida màxima: {{ MAX_FILE_SIZE }} MB</h6>
     <h6>Formats permesos:
     {% for i in content_types %}
@@ -26,14 +27,8 @@
     <h5>Professor:</h5>
     {{ form.professor }}
 
-    <h5>Alumne:</h5>
-    {{ form.alumne }}
-
     <h5>DNI/NIE alumne:</h5>
     {{ form.dni }}
-
-    <h5>Correu-e alumne:</h5>
-    {{ form.email }}
 
     <h5>Any:</h5>
     {{ form.curs }}
@@ -59,6 +54,10 @@
         <h5>Selecciona un fitxer:</h5>
         {{ form.file_upload }}
     </div>
+
+    <br>
+    <br>
+    {{ form.captcha }}
 
     <br>
     <br>
