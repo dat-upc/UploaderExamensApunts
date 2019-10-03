@@ -1,4 +1,3 @@
-import os
 from UploaderExamensApunts.constants import *
 
 def change_name(instance, filename):

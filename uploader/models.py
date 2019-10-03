@@ -48,6 +48,7 @@ class Upload(models.Model):
     professor = models.CharField(max_length=MAX_LENGTH)
     alumne = models.CharField(max_length=MAX_LENGTH)
     email = models.EmailField(max_length=MAX_LENGTH)
+    dni = models.CharField(max_length=MAX_LENGTH)
     curs = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+YEARS)
     quadrimestre = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+SEMESTER)
     document = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+DOCUMENTS)
