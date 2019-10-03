@@ -18,6 +18,7 @@ class Upload(models.Model):
         ("GR15", "Grau en Enginyeria de Tecnologies i Serveis de Telecomunicació"),
         ("GREE", "Grau en Enginyeria Electrònica de Telecomunicació"),
         ("GREF", "Grau en Enginyeria Física"),
+        ("GRCED", "Grau en Ciència i Enginyeria de Dades"),
     ]
     SEMESTER = [
         ("primavera", "Primavera"),
