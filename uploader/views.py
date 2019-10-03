@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from uploader.forms import UploadForm, SignUpForm
 from UploaderExamensApunts.constants import *
+from .utils.check_dni import check_dni
 
 def index(request):
     form = UploadForm()
@@ -10,7 +11,9 @@ def upload(request):
     if (request.method == "POST"):
         form = UploadForm(request.POST, request.FILES)
         if (form.is_valid()):
-            # TODO: Check if DNI exists.
+            if not check_dni(form.cleaned_data["dni"]):
+                return render(request, 'uploader/error.html', {'error': "El DNI/NIE introduït no està registrat.",
+                                                               "error_info": form.errors})
             form.save() # Save the form to the database.
             return render(request, 'uploader/success.html') # Say thank you to the uploader.
         else:
