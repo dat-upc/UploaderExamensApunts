@@ -8,9 +8,9 @@ def index(request):
     return render(request, 'uploader/form.html', {'form': form, 'MAX_FILE_SIZE': MAX_FILE_SIZE//1024//1024, "content_types": [i.split('/')[1] for i in CONTENT_TYPES if '/' in i]})
 
 def upload(request):
-    if (request.method == "POST"):
+    if request.method == "POST":
         form = UploadForm(request.POST, request.FILES)
-        if (form.is_valid()):
+        if form.is_valid():
             if not check_dni(form.cleaned_data["dni"]):
                 return render(request, 'uploader/error.html', {'error': "El DNI/NIE introduït no està registrat.",
                                                                "error_info": form.errors})
@@ -27,10 +27,10 @@ def signup(request):
     form = SignUpForm()
     return render(request, 'signup/form.html', {'form': form})
 
-def performSignup(request):
-    if (request.method == "POST"):
+def perform_signup(request):
+    if request.method == "POST":
         form = SignUpForm(request.POST)
-        if (form.is_valid()):
+        if form.is_valid():
             form.save() # Save the form to the database.
             return render(request, 'signup/success.html') # Say thank you to the uploader.
         else:
