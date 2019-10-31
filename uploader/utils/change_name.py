@@ -7,12 +7,12 @@ def change_name(instance, filename):
         name = instance.assignatura + "-y." + instance.curs + "-" + instance.document + "_" + \
                instance.parcial_final + "_" + instance.tipus_examen + "-q." + instance.quadrimestre\
                + "-d." + data + "-p." + instance.professor.replace(" ", "_") + "-a." + \
-               alumne.replace(" ", "_")
+               instance.alumne.replace(" ", "_")
         if instance.solucio:
             name = name + "-s"
         name = name + extension
     else:
         name = instance.assignatura + "-y." + instance.curs + "-" + instance.document + "-q." + \
                instance.quadrimestre + "-d." + data + "-p." + instance.professor.replace(" ", "_") + "-a." + \
-               alumne.replace(" ", "_") + extension
+               instance.alumne.replace(" ", "_") + extension
     return os.path.join(REL_TMP_DIR, name)

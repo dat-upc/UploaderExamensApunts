@@ -55,6 +55,7 @@ class Upload(models.Model):
     assignatura = models.CharField(max_length=MAX_LENGTH)
     professor = models.CharField(max_length=MAX_LENGTH)
     dni = models.CharField(max_length=MAX_LENGTH)
+    alumne = models.CharField(max_length=MAX_LENGTH, blank=True, default="")
     curs = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+YEARS)
     quadrimestre = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+SEMESTER)
     document = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+DOCUMENTS)

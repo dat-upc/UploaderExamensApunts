@@ -6,7 +6,8 @@ class UploadForm(forms.ModelForm):
     captcha = CaptchaField()
     class Meta:
         model = Upload
-        fields = ["grau", "assignatura", "professor", "dni", "curs", "quadrimestre", "document", "parcial_final", "tipus_examen", "solucio", "file_upload", "captcha"]
+        fields = ["grau", "assignatura", "professor", "dni", "curs", "quadrimestre", "document", "parcial_final",
+                  "tipus_examen", "solucio", "file_upload", "captcha", "alumne"]
 
 class SignUpForm(forms.ModelForm):
     captcha = CaptchaField()
