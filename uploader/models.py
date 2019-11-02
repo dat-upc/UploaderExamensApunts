@@ -6,12 +6,16 @@ from UploaderExamensApunts.constants import *
 import datetime
 
 class Person(models.Model):
+    # Django autocompletes plural names and writes "Persons" instead of "People".
+    class Meta:
+        verbose_name_plural = "people"
     MAX_LENGTH = 100
+
+    id = models.AutoField(primary_key=True)
     nom = models.CharField(max_length=MAX_LENGTH)
     email = models.EmailField(max_length=MAX_LENGTH, unique=True)
     dni = models.CharField(max_length=MAX_LENGTH, unique=True, verbose_name="DNI/NIE")
     punts_capsa = models.PositiveIntegerField(default=0)
-
 
 class Upload(models.Model):
     MAX_LENGTH = 100
@@ -50,6 +54,7 @@ class Upload(models.Model):
         ("reavaluacio", "Reavaluació"),
     ]
 
+    id = models.AutoField(primary_key=True)
     upload_date = models.DateField(default=timezone.now)
     grau = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+DEGREES)
     assignatura = models.CharField(max_length=MAX_LENGTH)

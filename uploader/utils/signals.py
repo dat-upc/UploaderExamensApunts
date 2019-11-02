@@ -1,7 +1,8 @@
-from django.db.models.signals import pre_delete, post_save
+from django.db.models.signals import pre_delete, post_save, pre_save
 from django.dispatch.dispatcher import receiver
 from uploader.models import Upload
 from .change_name import change_name
+from .concurs_capsa import add_points
 from UploaderExamensApunts.constants import *
 import os
 
@@ -37,3 +38,15 @@ def move_file(sender, instance, **kwargs):
             os.rename(old_name, new_name)
         finally:
             del instance._dirty
+
+# Concurs capsa
+@receiver(pre_save, sender=Upload)
+def capsa_points(sender, instance, **kwargs):
+    # To handle initial object creation.
+    try:
+        previous = Upload.objects.get(id=instance.id)
+    except Upload.DoesNotExist:
+        return None
+
+    if instance.is_correct != previous.is_correct:
+        add_points(instance.document, instance.dni)
