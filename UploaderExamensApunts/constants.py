@@ -16,10 +16,10 @@
 #
 import os
 
-MEDIA_ROOT_SAVED = '/home/uploader/uploads/' # Absolute path to the media directory.
+MEDIA_ROOT_SAVED = '/home/samba/examens/' # Absolute path to the media directory.
 REL_TMP_DIR = 'tmp'
 ABS_TMP_DIR = os.path.join(MEDIA_ROOT_SAVED, REL_TMP_DIR) # Absolute path to the temporal files directory.
-REL_FINAL_DIR = 'files'
+REL_FINAL_DIR = 'Actuals'
 ABS_FINAL_DIR = os.path.join(MEDIA_ROOT_SAVED, REL_FINAL_DIR)
 CONTENT_TYPES = ['application/pdf'] # Accepted formats.
 FIRST_YEAR = 2000 # First year to start computing courses.
