@@ -14,21 +14,20 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with DAT - UploaderExamensApunts. If not, see <https://www.gnu.org/licenses/>.
 #
-import os
-from UploaderExamensApunts.constants import *
+from directorySeeker.models import Degree, Subject
 
-# Returns a dictionary with "shortName": "relPath".
-def seek_subjects(degree):
-    search_path = os.path.join(ABS_FINAL_DIR, degree)
-    paths = [name for name in os.listdir(search_path) if os.path.isdir(os.path.join(search_path, name))]
-    subjects = {}
+## WIP ##
 
-    for p in paths:
-        dot = p.find('.')
-        dash = p.find('-')
-        if dash == -1:
-            subjects[p[dot+1:]] = p
-        else:
-            subjects[p[dot + 1:dash]] = p
+# Inserts, removes and updates degrees.
+def update_degrees(shortName, path):
+    update_model("degree", shortName, path)
 
-    return subjects
+# Inserts, removes and updates subjects.
+def update_subjects(shortName, path):
+    update_model("subject", shortName, path)
+
+def update_model(modelType, shortName, path):
+    if modelType == "degree":
+        pass
+    elif modelType == "subject":
+        pass

@@ -22,6 +22,7 @@ class Degree(models.Model):
     id = models.AutoField(primary_key=True)
     shortName = models.CharField(max_length=MAX_LENGTH, unique=True)
     longName = models.EmailField(max_length=MAX_LENGTH)
+    path = models.CharField(max_length=MAX_LENGTH, unique=True)
 
 class Subject(models.Model):
     MAX_LENGTH = 100
@@ -29,3 +30,4 @@ class Subject(models.Model):
     id = models.AutoField(primary_key=True)
     shortName = models.CharField(max_length=MAX_LENGTH, unique=True)
     degree = models.ForeignKey(Degree, on_delete=models.CASCADE)
+    path = models.CharField(max_length=MAX_LENGTH, unique=True)
