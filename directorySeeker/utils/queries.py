@@ -16,10 +16,10 @@
 #
 from directorySeeker.models import Degree, Subject
 
-## WIP ##
+## WIP ###
 
 # Inserts, removes and updates degrees.
-def update_degrees(degreeDict, path, longName):
+def update_degrees(degreeDict, path, longNames):
     currentDegrees = list(Degree.objects.values("shortName", flat=True))
     for d in currentDegrees:
         if d not in degreeDict.keys():
@@ -29,9 +29,20 @@ def update_degrees(degreeDict, path, longName):
             if path != Degree.objects.all.filter(shortName=shortName)[0].path
                 Degree.objects.filter(shortName=shortName).update(path=path)
         else:
-            d = Degree(shortName=shortName, path=path, longName=longName)
+            d = Degree(shortName=shortName, path=path, longName=longName[shortName])
             d.save()
 
 # Inserts, removes and updates subjects.
 def update_subjects(subjectDict, path):
-    pass
+    currentSubjects = list(Subject.objects.values("shortName", flat=True))
+    relatedDegree = Subject.objects.all.filter(shortName=shortName)[0]
+    for s in currentSubjects:
+        if s not in subjectDict.keys():
+            Subject.objects.filter(shortName=s).delete()
+    for shortName, path in subjectDict.items():
+        if shortName in currentSubjects:
+            if path != relatedDegree.path
+                Subject.objects.filter(shortName=shortName).update(path=path)
+        else:
+            s = Subject(shortName=shortName, path=path, degree=relatedDegree)
+            s.save()
