@@ -19,15 +19,19 @@ from directorySeeker.models import Degree, Subject
 ## WIP ##
 
 # Inserts, removes and updates degrees.
-def update_degrees(shortName, path):
-    update_model("degree", shortName, path)
+def update_degrees(degreeDict, path, longName):
+    currentDegrees = list(Degree.objects.values("shortName", flat=True))
+    for d in currentDegrees:
+        if d not in degreeDict.keys():
+            Degree.objects.filter(shortName=d).delete()
+    for shortName, path in degreeDict.items():
+        if shortName in currentDegrees:
+            if path != Degree.objects.all.filter(shortName=shortName)[0].path
+                Degree.objects.filter(shortName=shortName).update(path=path)
+        else:
+            d = Degree(shortName=shortName, path=path, longName=longName)
+            d.save()
 
 # Inserts, removes and updates subjects.
-def update_subjects(shortName, path):
-    update_model("subject", shortName, path)
-
-def update_model(modelType, shortName, path):
-    if modelType == "degree":
-        pass
-    elif modelType == "subject":
-        pass
+def update_subjects(subjectDict, path):
+    pass
