@@ -15,6 +15,7 @@
 # along with DAT - UploaderExamensApunts. If not, see <https://www.gnu.org/licenses/>.
 #
 from uploader.models import Person
+from directorySeeker.models import Degree, Subject
 
 def check_dni(dni):
     people = Person.objects.all().filter(dni=dni) # List size should be 1
@@ -31,3 +32,8 @@ def get_points(dni):
 
 def update_points(dni, points):
     Person.objects.filter(dni=dni).update(punts_capsa=points)
+
+def list_subjects(degree):
+    queryset = list(Subject.objects.filter(degree__shortName=degree))
+    result = [(q['shortName'], q['shortName']) for q in queryset]
+    return result

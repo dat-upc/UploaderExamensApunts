@@ -22,7 +22,9 @@ from .utils.queries import check_dni, get_name
 def index(request):
     form = UploadForm()
     return render(request, 'uploader/form.html', {'form': form, 'MAX_FILE_SIZE': MAX_FILE_SIZE//1024//1024,
-                                                  "content_types": [i.split('/')[1] for i in CONTENT_TYPES if '/' in i]})
+                                                  "content_types": [i.split('/')[1] for i in CONTENT_TYPES if '/' in i],
+                                                  "degrees": DEGREES.keys(),
+                                                  })
 
 def upload(request):
     if request.method == "POST":

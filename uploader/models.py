@@ -34,6 +34,7 @@ class Person(models.Model):
     punts_capsa = models.PositiveIntegerField(default=0)
 
 class Upload(models.Model):
+    from .utils.queries import list_subjects # Import here to avoid circular importing with Person.
     MAX_LENGTH = 100
     EMPTY = [
         ("", "---")
@@ -41,12 +42,6 @@ class Upload(models.Model):
     YEARS = [
         (str(x) + "_" + str((x+1)%100), str(x) + "-" + str(x + 1)) for x in range(FIRST_YEAR, datetime.datetime.now().year if (
                 datetime.datetime.now().month < 9) else datetime.datetime.now().year + 1)
-    ]
-    DEGREES = [
-        ("GR15", "Grau en Enginyeria de Tecnologies i Serveis de Telecomunicació"),
-        ("GEE", "Grau en Enginyeria Electrònica de Telecomunicació"),
-        ("GEF", "Grau en Enginyeria Física"),
-        ("GCED", "Grau en Ciència i Enginyeria de Dades"),
     ]
     SEMESTER = [
         ("primavera", "Primavera"),
@@ -72,8 +67,8 @@ class Upload(models.Model):
 
     id = models.AutoField(primary_key=True)
     upload_date = models.DateField(default=timezone.now)
-    grau = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+DEGREES)
-    assignatura = models.CharField(max_length=MAX_LENGTH)
+    grau = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+list(DEGREES_LONG.items()))
+    assignatura = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+list_subjects(degree)) ## WIP
     professor = models.CharField(max_length=MAX_LENGTH)
     dni = models.CharField(max_length=MAX_LENGTH)
     alumne = models.CharField(max_length=MAX_LENGTH, blank=True, default="")

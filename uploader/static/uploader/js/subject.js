@@ -14,8 +14,16 @@
 * You should have received a copy of the GNU Affero General Public License
 * along with DAT - UploaderExamensApunts. If not, see <https://www.gnu.org/licenses/>.
 */
-function amaga() {
-    $("#examen").hide();
-    $("[id^=assigG]").hide();
-}
-amaga(); 
+var anterior;
+var actual;
+
+$("#id_grau").change(function() {
+    if ($("#id_grau option:selected").val() == "") $("#assignatura").show();
+    $("#assignatura").hide();
+    actual = "#" + "assig" + $("#id_grau option:selected").val();
+
+    $(anterior).hide();
+    $(actual).show();
+    anterior = actual;
+    actual = "";
+});

@@ -16,8 +16,6 @@
 #
 from directorySeeker.models import Degree, Subject
 
-## WIP ###
-
 # Inserts, removes and updates degrees.
 def update_degrees(degreeDict, path, longNames):
     currentDegrees = list(Degree.objects.values("shortName", flat=True))

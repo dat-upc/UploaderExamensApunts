@@ -19,6 +19,7 @@
 {% block scripts %}
 {% load static %}
 <script type="text/javascript" src="{% static 'uploader/js/document.js' %}" async></script>
+<script type="text/javascript" src="{% static 'uploader/js/subject.js' %}" async></script>
 <script type="text/javascript" src="{% static 'uploader/js/amaga.js' %}" async></script>
 {% endblock %}
 
@@ -37,8 +38,17 @@
     <h5>Grau:</h5>
     {{ form.grau }}
 
-    <h5>Assignatura (sigles):</h5>
-    {{ form.assignatura }}
+    <h5>Assignatura:</h5>
+    <div id="assignatura">
+        <select name="assignatura" required id="id_assignatura">
+                <option value="" selected>---</option>
+        </select>
+    </div>
+    {% for i in degrees %}
+        <div id="assig{{ i }}">
+            {{ form.assignatura }}
+        </div>
+    {% endfor %}
 
     <h5>Professor:</h5>
     {{ form.professor }}
