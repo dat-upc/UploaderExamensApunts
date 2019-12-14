@@ -17,5 +17,6 @@
 function amaga() {
     $("#examen").hide();
     $("[id^=assigG]").hide();
+    $("#assignatura").show();
 }
 amaga(); 

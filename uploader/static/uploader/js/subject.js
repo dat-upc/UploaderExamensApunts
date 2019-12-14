@@ -18,9 +18,9 @@ var anterior;
 var actual;
 
 $("#id_grau").change(function() {
-    if ($("#id_grau option:selected").val() == "") $("#assignatura").show();
     $("#assignatura").hide();
     actual = "#" + "assig" + $("#id_grau option:selected").val();
+    if ($("#id_grau option:selected").val() == "") $("#assignatura").show();
 
     $(anterior).hide();
     $(actual).show();

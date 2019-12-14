@@ -17,13 +17,17 @@
 from django.shortcuts import render
 from uploader.forms import UploadForm, SignUpForm
 from UploaderExamensApunts.constants import *
-from .utils.queries import check_dni, get_name
+from .utils.queries import check_dni, get_name, list_subjects
 
 def index(request):
     form = UploadForm()
+    subjects = {}
+    for d in DEGREES.keys():
+        subjects[d] = list_subjects(d)
     return render(request, 'uploader/form.html', {'form': form, 'MAX_FILE_SIZE': MAX_FILE_SIZE//1024//1024,
                                                   "content_types": [i.split('/')[1] for i in CONTENT_TYPES if '/' in i],
                                                   "degrees": DEGREES.keys(),
+                                                  "subjects": subjects,
                                                   })
 
 def upload(request):

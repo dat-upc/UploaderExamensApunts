@@ -54,6 +54,7 @@ ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 INSTALLED_APPS = [
     'uploader.apps.UploaderConfig',
+    'directorySeeker.apps.DirectorySeekerConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

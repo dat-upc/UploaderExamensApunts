@@ -14,26 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with DAT - UploaderExamensApunts. If not, see <https://www.gnu.org/licenses/>.
 #
-from uploader.models import Person
-from directorySeeker.models import Subject
+from django.apps import AppConfig
 
-def check_dni(dni):
-    people = Person.objects.all().filter(dni=dni) # List size should be 1
-    dni_list = [person.dni for person in people]
-    return dni in dni_list
-
-def get_name(dni):
-    people = Person.objects.all().filter(dni=dni) # List size should be 1
-    name_list = [person.nom for person in people]
-    return name_list[0]
-
-def get_points(dni):
-    return Person.objects.all().filter(dni=dni)[0].punts_capsa
-
-def update_points(dni, points):
-    Person.objects.filter(dni=dni).update(punts_capsa=points)
-
-def list_subjects(degree):
-    queryset = list(Subject.objects.filter(degree__shortName=degree))
-    result = list(queryset)
-    return result
+class DirectorySeekerConfig(AppConfig):
+    name = 'directorySeeker'
