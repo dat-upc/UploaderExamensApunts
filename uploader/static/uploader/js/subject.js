@@ -14,16 +14,16 @@
 * You should have received a copy of the GNU Affero General Public License
 * along with DAT - UploaderExamensApunts. If not, see <https://www.gnu.org/licenses/>.
 */
-var anterior;
-var actual;
+var assig_anterior;
+var assig_actual;
 
 $("#id_grau").change(function() {
     $("#assignatura").hide();
-    actual = "#" + "assig" + $("#id_grau option:selected").val();
+    assig_actual = "#" + "assig" + $("#id_grau option:selected").val();
     if ($("#id_grau option:selected").val() == "") $("#assignatura").show();
 
-    $(anterior).hide();
-    $(actual).show();
-    anterior = actual;
-    actual = "";
+    $(assig_anterior).hide();
+    $(assig_actual).show();
+    assig_anterior = actual;
+    assig_actual = "";
 });
