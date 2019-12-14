@@ -40,13 +40,13 @@
 
     <h5>Assignatura:</h5>
     <div id="assignatura">
-        <select name="assignatura" required>
+        <select name="assignatura" id="id_assignatura">
                 <option value="" selected>---</option>
         </select>
     </div>
     {% for d in degrees %}
         <div id="assig{{ d }}">
-            <select id="id_assignatura">
+            <select name="assig{{ d }}" id="id_assig{{ d }}">
                 {% for key, value in subjects.items %}
                     {% if key == d %}
                         {% for s in value %}

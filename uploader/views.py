@@ -18,6 +18,7 @@ from django.shortcuts import render
 from uploader.forms import UploadForm, SignUpForm
 from UploaderExamensApunts.constants import *
 from .utils.queries import check_dni, get_name, list_subjects
+from .utils.get_assignatura import get_assignatura
 
 def index(request):
     form = UploadForm()
@@ -39,6 +40,7 @@ def upload(request):
                                                                "error_info": form.errors})
             upload = form.save(commit=False) # Save the form but don't send it to the DB.
             upload.alumne = get_name(upload.dni)
+            upload.assignatura = get_assignatura(form.cleaned_data)
             upload.save() # Now send it to the DB.
             return render(request, 'uploader/success.html') # Say thank you to the uploader.
         else:

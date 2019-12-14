@@ -24,6 +24,6 @@ $("#id_grau").change(function() {
 
     $(assig_anterior).hide();
     $(assig_actual).show();
-    assig_anterior = actual;
+    assig_anterior = assig_actual;
     assig_actual = "";
 });

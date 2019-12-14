@@ -35,5 +35,5 @@ def update_points(dni, points):
 
 def list_subjects(degree):
     queryset = list(Subject.objects.filter(degree__shortName=degree))
-    result = list(queryset)
+    result = ['---'] + list(queryset)
     return result
