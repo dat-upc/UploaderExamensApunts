@@ -15,7 +15,20 @@
 # along with DAT - UploaderExamensApunts. If not, see <https://www.gnu.org/licenses/>.
 #
 from django.shortcuts import render
+from django.http import HttpResponse
 from UploaderExamensApunts.constants import *
+from UploaderExamensApunts.settings_secret import TOKEN
+from .utils.queries import *
+from .utils.seek_subjects import seek_subjects
 
 def update(request):
-    return
+    token = request.META.get('HTTP_AUTHORIZATION')
+    if token == TOKEN:
+        html = "<html><body>The database update process has finished. You can leave this page.</body></html>"
+        update_degrees(DEGREES, DEGREES_LONG) # Update degrees in the database.
+        # Update subjects.
+        for d in DEGREES.keys():
+            update_subjects(seek_subjects(d), d)
+        return HttpResponse(html)
+    else:
+        return HttpResponse('<h1>Invalid token</h1>', status=403)
