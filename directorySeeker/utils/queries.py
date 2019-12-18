@@ -17,29 +17,31 @@
 from directorySeeker.models import Degree, Subject
 
 # Inserts, removes and updates degrees.
-def update_degrees(degreeDict, path, longNames):
-    currentDegrees = list(Degree.objects.values("shortName", flat=True))
+def update_degrees(degreeDict, longNames):
+    currentDegrees = [d['shortName'] for d in Degree.objects.values("shortName")]
     for d in currentDegrees:
-        if d not in degreeDict.keys():
+        if d not in list(degreeDict.keys()):
             Degree.objects.filter(shortName=d).delete()
     for shortName, path in degreeDict.items():
         if shortName in currentDegrees:
-            if path != Degree.objects.all.filter(shortName=shortName)[0].path
+            if path != Degree.objects.all().filter(shortName=shortName)[0].path:
                 Degree.objects.filter(shortName=shortName).update(path=path)
         else:
-            d = Degree(shortName=shortName, path=path, longName=longName[shortName])
+            d = Degree(shortName=shortName, path=path, longName=longNames[shortName])
             d.save()
 
 # Inserts, removes and updates subjects.
-def update_subjects(subjectDict, path):
-    currentSubjects = list(Subject.objects.values("shortName", flat=True))
-    relatedDegree = Subject.objects.all.filter(shortName=shortName)[0]
+def update_subjects(subjectDict, degree):
+    relatedDegree = Degree.objects.all().filter(shortName=degree)[0]
+    currentSubjects = [d['shortName'] for d in Subject.objects.filter(degree=relatedDegree).values("shortName")]
+    print (currentSubjects)
     for s in currentSubjects:
-        if s not in subjectDict.keys():
+        if s not in list(subjectDict.keys()):
             Subject.objects.filter(shortName=s).delete()
     for shortName, path in subjectDict.items():
+        path = path[path.rfind('/')+1:]
         if shortName in currentSubjects:
-            if path != relatedDegree.path
+            if path != Subject.objects.all().filter(shortName=shortName)[0].path:
                 Subject.objects.filter(shortName=shortName).update(path=path)
         else:
             s = Subject(shortName=shortName, path=path, degree=relatedDegree)
