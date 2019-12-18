@@ -27,8 +27,8 @@ def seek_subjects(degree):
         dot = p.find('.')
         dash = p.find('-')
         if dash == -1:
-            subjects[p[dot+1:]] = p
+            subjects[p[dot+1:]] = degree + '/' + p
         else:
-            subjects[p[dot + 1:dash]] = p
+            subjects[p[dot + 1:dash]] = degree + '/' + p
 
     return subjects
