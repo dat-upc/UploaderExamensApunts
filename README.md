@@ -8,19 +8,23 @@ All the files in this repository are licensed under the **GNU Affero General Pub
 ## Development ##
 This installation notes are for a development environment. For a production environment please see the **Production** section below.
 
-1. Create the file `UploaderExamensApunts/settings_secret.readme`:
+1. Create the file `UploaderExamensApunts/settings_secret.py`:
 ```python
+# Create a settings_secret.py for DB credentials following this format:
 SECRET_KEY_SAVED='SECRET_KEY'
-DATABASE_MYSQL="dat_uploader"
-USER_NAME="dat"
+DATABASE_MYSQL="DBName"
+USER_NAME="user"
 PASSWORD="password"
 HOST='127.0.0.1'
+TOKEN="TOKEN_TO_UPDATE_SUBJECTS"
 ```
 
-2. Create `uploader/migrations/__init__.py`:
+2. Create migrations directories:
 ```bash
 mkdir uploader/migrations
 touch uploader/migrations/__init__.py
+mkdir directorySeeker/migrations
+touch directorySeeker/migrations/__init__.py
 ```
 
 3. Install required software:
@@ -50,7 +54,7 @@ docker start -a <container_id>
 
 1. Install required software:
 ```
-sudo apt install python3 python3-venv python3-pip git mysql-server mysql-client python3-mysqldb
+sudo apt install python3 python3-venv python3-pip git mysql-server mysql-client python3-mysqldb python3-dev
 ```
 
 2. Create a virtual environment:
@@ -80,7 +84,9 @@ During this step you should follow the instructions in `UploaderExamensApunts/se
 git clone https://github.com/dat-upc/UploaderExamensApunts.git
 cd UploaderExamensApunts
 mkdir uploader/migrations
+mkdir directorySeeker/migrations
 touch uploader/migrations/__init__.py
+touch directorySeeker/migrations/__init__.py
 python3 manage.py makemigrations
 python3 manage.py migrate
 ```
