@@ -113,6 +113,7 @@ python3 manage.py migrate
         WSGIDaemonProcess uploads.dat.upc.edu python-home=/path/to/venv python-path=/path/to/UploaderExamensApunts
         WSGIProcessGroup uploads.dat.upc.edu
         WSGIScriptAlias / /path/to/UploaderExamensApunts/UploaderExamensApunts/wsgi.py
+		WSGIPassAuthorization On
         <Directory /path/to/UploaderExamensApunts/UploaderExamensApunts>
                 Require all granted
         </Directory>
