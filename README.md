@@ -101,6 +101,15 @@ python3 manage.py migrate
         ErrorLog ${APACHE_LOG_DIR}/error.log
         CustomLog ${APACHE_LOG_DIR}/access.log combined
 
+        Alias /static/ /path/to/static/
+        Alias /media/ /path/to/media/
+        <Directory /path/to/static/>
+                Require all granted
+        </Directory>
+        <Directory /path/to/media/>
+                Require all granted
+        </Directory>
+
         WSGIDaemonProcess uploads.dat.upc.edu python-home=/path/to/venv python-path=/path/to/UploaderExamensApunts
         WSGIProcessGroup uploads.dat.upc.edu
         WSGIScriptAlias / /path/to/UploaderExamensApunts/UploaderExamensApunts/wsgi.py
