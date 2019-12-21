@@ -69,7 +69,7 @@ class Upload(models.Model):
     upload_date = models.DateField(default=timezone.now)
     grau = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+list(DEGREES_LONG.items()))
     assignatura = models.CharField(max_length=MAX_LENGTH, blank=True, default="")
-    professor = models.CharField(max_length=MAX_LENGTH)
+    professor = models.CharField(max_length=MAX_LENGTH, blank=True, default="")
     dni = models.CharField(max_length=MAX_LENGTH)
     alumne = models.CharField(max_length=MAX_LENGTH, blank=True, default="")
     curs = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+YEARS)
