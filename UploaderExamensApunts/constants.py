@@ -16,6 +16,8 @@
 #
 import os
 
+STATIC_ROOT_SAVED = '/var/www/dat-uploads/static'
+
 MEDIA_ROOT_SAVED = '/home/samba/examens/' # Absolute path to the media directory.
 REL_TMP_DIR = 'tmp'
 ABS_TMP_DIR = os.path.join(MEDIA_ROOT_SAVED, REL_TMP_DIR) # Absolute path to the temporal files directory.
