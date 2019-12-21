@@ -50,11 +50,11 @@ docker start -a <container_id>
 ```
 
 ## Production ##
-### nginx ###
+### Apache2 ###
 
 1. Install required software:
 ```
-sudo apt install python3 python3-venv python3-pip git mysql-server mysql-client python3-mysqldb python3-dev
+sudo apt install python3 python3-venv python3-pip git mysql-server mysql-client python3-mysqldb python3-dev libz-dev libjpeg-dev libfreetype6-dev libapache2-mod-wsgi-py3
 ```
 
 2. Create a virtual environment:
@@ -66,7 +66,7 @@ source bin/activate
 
 3. Install Django:
 ```
-pip3 install Django
+pip3 install Django==2.2.9 django-simple-captcha mysqlclient
 ```
 
 4. Configure the database:
@@ -91,4 +91,26 @@ python3 manage.py makemigrations
 python3 manage.py migrate
 ```
 
-6. TODO
+6. Set up a VirtualHost:
+```text
+<IfModule mod_ssl.c>
+<VirtualHost *:443>
+        ServerAdmin becari.server@dat.upc.edu
+        ServerName uploads.dat.upc.edu
+        ServerAlias uploads.dat.upc.edu
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+        WSGIDaemonProcess uploads.dat.upc.edu python-home=/path/to/venv python-path=/path/to/UploaderExamensApunts
+        WSGIProcessGroup uploads.dat.upc.edu
+        WSGIScriptAlias / /path/to/UploaderExamensApunts/UploaderExamensApunts/wsgi.py
+        <Directory /path/to/UploaderExamensApunts/UploaderExamensApunts>
+                Require all granted
+        </Directory>
+
+        SSLCertificateFile /etc/letsencrypt/live/uploads.dat.upc.edu/fullchain.pem
+        SSLCertificateKeyFile /etc/letsencrypt/live/uploads.dat.upc.edu/privkey.pem
+        Include /etc/letsencrypt/options-ssl-apache.conf
+</VirtualHost>
+</IfModule>
+```

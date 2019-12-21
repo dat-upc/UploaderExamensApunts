@@ -47,7 +47,7 @@ SECRET_KEY = SECRET_KEY_SAVED
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "uploads.dat.upc.edu"]
 
 
 # Application definition
