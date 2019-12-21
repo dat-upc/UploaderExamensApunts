@@ -19,6 +19,7 @@ from django.dispatch.dispatcher import receiver
 from uploader.models import Upload
 from .change_name import change_name
 from .concurs_capsa import add_points
+from .queries import get_subject_path
 from UploaderExamensApunts.constants import *
 import os
 
@@ -34,9 +35,10 @@ def move_file(sender, instance, **kwargs):
     # Absolute path to the file.
     old_name = os.path.join(MEDIA_ROOT_SAVED, instance.file_upload.name)
     if instance.is_correct:
-        new_name = os.path.join(ABS_FINAL_DIR, instance.grau, os.path.basename(change_name(instance, os.path.basename(old_name))))
+        assig_path = get_subject_path(instance.assignatura, instance.grau)
+        new_name = os.path.join(ABS_FINAL_DIR, instance.grau, assig_path, os.path.basename(change_name(instance, os.path.basename(old_name))))
         created = False
-        dest_dir = os.path.join(REL_FINAL_DIR, instance.grau)
+        dest_dir = os.path.join(REL_FINAL_DIR, instance.grau, assig_path)
     else:
         new_name = os.path.join(MEDIA_ROOT_SAVED, change_name(instance, os.path.basename(old_name)))
         created = kwargs.get('created')

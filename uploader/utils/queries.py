@@ -37,3 +37,7 @@ def list_subjects(degree):
     queryset = [d["shortName"] for d in Subject.objects.all().filter(degree__shortName=degree).values("shortName")]
     result = ['---'] + list(queryset)
     return result
+
+def get_subject_path(shortName, degree):
+    path = Subject.objects.all().filter(shortName=shortName, degree__shortName=degree)[0].path
+    return path[path.rfind('/')+1:]
