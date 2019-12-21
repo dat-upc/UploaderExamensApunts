@@ -39,4 +39,7 @@ urlpatterns = [
     path('', include('uploader.urls')),
     path('captcha/', include('captcha.urls')),
     path('update/', include('directorySeeker.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+if settings.DEBUG:
+   urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
