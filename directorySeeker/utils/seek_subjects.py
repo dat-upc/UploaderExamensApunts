@@ -22,7 +22,7 @@ def seek_subjects(degree):
     search_path = os.path.join(ABS_FINAL_DIR, degree)
     paths = [name for name in os.listdir(search_path) if os.path.isdir(os.path.join(search_path, name))]
     subjects = {}
-
+    print("Hello, World!")
     for p in paths:
         dot = p.find('.')
         dash = p.find('-')
