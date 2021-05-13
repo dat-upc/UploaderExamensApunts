@@ -23,8 +23,6 @@ TOKEN="TOKEN_TO_UPDATE_SUBJECTS"
 ```bash
 mkdir uploader/migrations
 touch uploader/migrations/__init__.py
-mkdir directorySeeker/migrations
-touch directorySeeker/migrations/__init__.py
 ```
 
 3. Install required software:
@@ -84,9 +82,7 @@ During this step you should follow the instructions in `UploaderExamensApunts/se
 git clone https://github.com/dat-upc/UploaderExamensApunts.git
 cd UploaderExamensApunts
 mkdir uploader/migrations
-mkdir directorySeeker/migrations
 touch uploader/migrations/__init__.py
-touch directorySeeker/migrations/__init__.py
 python3 manage.py makemigrations
 python3 manage.py migrate
 ```
