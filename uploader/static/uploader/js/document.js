@@ -20,7 +20,7 @@ var doc_actual;
 $("#id_document").change(function() {
     $("#id_parcial_final").val("");
     $("#id_tipus_examen").val("");
-    doc_actual = "#" + $("#id_document option:selected").val();
+    doc_actual = "#exam-" + $("#id_document option:selected").val();
 
     $(doc_anterior).hide();
     $(doc_actual).show();

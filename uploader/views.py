@@ -17,23 +17,25 @@
 from django.shortcuts import render
 from uploader.forms import UploadForm, SignUpForm
 from UploaderExamensApunts.constants import *
-from .utils.queries import check_dni, get_name, list_subjects, get_degrees
+from .utils.queries import check_dni, get_name, list_subjects, get_degrees, get_document_type_id
 
 def index(request):
     form = UploadForm()
     degrees = get_degrees()
     subjects = {}
     for d in degrees:
-        subjects[d] = list_subjects(d)
+        subjects[d.id] = list_subjects(d)
     return render(request, 'uploader/form.html', {'form': form, 'MAX_FILE_SIZE': MAX_FILE_SIZE//1024//1024,
                                                   "content_types": [i.split('/')[1] for i in CONTENT_TYPES if '/' in i],
                                                   "degrees": degrees,
                                                   "subjects": subjects,
+                                                  "exam_id": get_document_type_id("Examen")
                                                   })
 
 def upload(request):
     if request.method == "POST":
         form = UploadForm(request.POST, request.FILES)
+        print(form)
         if form.is_valid():
             if not check_dni(form.cleaned_data["dni"]):
                 return render(request, 'uploader/error.html', {'error': "El DNI/NIE introduït no està registrat.",

@@ -40,17 +40,18 @@
 
     <h5>Assignatura:</h5>
     <div id="assignatura">
-        <select name="assignatura" id="id_assignatura">
-                <option value="" selected>---</option>
+        <select name="assig_fake" id="id_assig_fake">
+                <option value="---" selected>---</option>
         </select>
     </div>
     {% for d in degrees %}
-        <div id="assig{{ d }}">
-            <select name="assig{{ d }}" id="id_assig{{ d }}">
+        <div id="assigG{{ d.id }}">
+            <select name="assignatura" id="id_assignatura">
+                <option value="---" selected>---</option>
                 {% for key, value in subjects.items %}
-                    {% if key == d %}
+                    {% if key == d.id %}
                         {% for s in value %}
-                            <option value="{{ s }}">{{ s }}</option>
+                            <option value="{{ s.id }}">{{ s.nom }}</option>
                         {% endfor %}
                     {% endif %}
                 {% endfor %}
@@ -73,7 +74,7 @@
     <h5>Tipus de document:</h5>
     {{ form.document }}
 
-    <div id="examen">
+    <div id="exam-{{ exam_id }}">
         <h5>Tipus d'examen:</h5>
         <p></p>
         {{ form.parcial_final }}

@@ -22,14 +22,11 @@ from .utils.queries import get_degrees
 
 class UploadForm(forms.ModelForm):
     captcha = CaptchaField()
-    degrees = get_degrees()
-    for d in degrees:
-        exec("assig" + d + " = forms.CharField()")
 
     class Meta:
         model = Upload
         fields = ["grau", "assignatura", "professor", "dni", "curs", "quadrimestre", "document", "parcial_final",
-                  "tipus_examen", "solucio", "file_upload", "captcha", "alumne"] + ["assig" + d for d in degrees]
+                  "tipus_examen", "solucio", "file_upload", "captcha", "alumne"]
 
 
 class SignUpForm(forms.ModelForm):
