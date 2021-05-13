@@ -17,8 +17,24 @@
 from django.contrib import admin
 from uploader.models import Upload, Person
 
+class DegreeAdmin(admin.ModelAdmin):
+    list_display = ('nom_curt', 'nom')
+    exclude = ()
+
+class SubjectAdmin(admin.ModelAdmin):
+    list_display = ('nom', 'grau')
+    exclude = ()
+
+class ExamTypeAdmin(admin.ModelAdmin):
+    list_display = ('nom',)
+    exclude = ()
+
+class DocumentTypeAdmin(admin.ModelAdmin):
+    list_display = ('nom',)
+    exclude = ()
+
 class UploadAdmin(admin.ModelAdmin):
-    list_display = ('upload_date', 'grau', 'file_upload', 'is_correct')
+    list_display = ('upload_date', 'grau', 'assignatura', 'file_upload', 'is_correct')
     exclude = ()
 
 class PersonAdmin(admin.ModelAdmin):

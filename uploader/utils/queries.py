@@ -14,8 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with DAT - UploaderExamensApunts. If not, see <https://www.gnu.org/licenses/>.
 #
-from uploader.models import Person
-from directorySeeker.models import Subject, Degree
+from uploader.models import Person, Subject, Degree
 
 def check_dni(dni):
     people = Person.objects.all().filter(dni=dni) # List size should be 1
@@ -34,10 +33,15 @@ def update_points(dni, points):
     Person.objects.filter(dni=dni).update(punts_capsa=points)
 
 def list_subjects(degree):
-    queryset = [d["shortName"] for d in Subject.objects.all().filter(degree__shortName=degree).values("shortName")]
+    queryset = [s["nom"] for s in Subject.objects.all().filter(degree__shortName=degree).values("nom")]
     result = ['---'] + list(queryset)
     return result
 
 def get_subject_path(shortName, degree):
     path = Subject.objects.all().filter(shortName=shortName, degree__shortName=degree)[0].path
     return path[path.rfind('/')+1:]
+
+def get_degrees():
+    queryset = [d["nom_curt"] for d in Degree.objects.all().values("nom_curt")]
+    result = ['---'] + list(queryset)
+    return result

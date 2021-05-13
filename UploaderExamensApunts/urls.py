@@ -38,7 +38,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('uploader.urls')),
     path('captcha/', include('captcha.urls')),
-    path('update/', include('directorySeeker.urls')),
 ]
 
 if settings.DEBUG:

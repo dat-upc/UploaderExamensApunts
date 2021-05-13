@@ -33,17 +33,3 @@ EXAMEN_POINTS = 1
 RESUM_POINTS = 1
 FORMULARI_POINTS = 1
 DEFAULT_POINTS = 1
-
-# Degrees
-DEGREES = {
-    "GR15": os.path.join(ABS_FINAL_DIR, "GR15"),
-    "GEE": os.path.join(ABS_FINAL_DIR, "GEE"),
-    "GEF": os.path.join(ABS_FINAL_DIR, "GEF"),
-    "GCED": os.path.join(ABS_FINAL_DIR, "GCED"),
-}
-DEGREES_LONG = {
-    "GR15": "Grau en Enginyeria de Tecnologies i Serveis de la Telecomunicació",
-    "GEE": "Grau en Enginyeria Electrònica de Telecomunicació",
-    "GEF": "Grau en Enginyeria Física",
-    "GCED": "Grau en Ciència i Enginyeria de Dades",
-}

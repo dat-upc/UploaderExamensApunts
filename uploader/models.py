@@ -33,6 +33,39 @@ class Person(models.Model):
     dni = models.CharField(max_length=MAX_LENGTH, unique=True, verbose_name="DNI/NIE")
     punts_capsa = models.PositiveIntegerField(default=0)
 
+class Degree(models.Model):
+    MAX_LENGTH = 200
+    id = models.AutoField(primary_key=True)
+    nom = models.CharField(max_length=MAX_LENGTH)
+    nom_curt = models.CharField(max_length=MAX_LENGTH, unique=True, null=True)
+    ruta = models.CharField(max_length=MAX_LENGTH, default="")
+
+    def __str__(self):
+        return self.nom
+
+class Subject(models.Model):
+    MAX_LENGTH = 200
+    id = models.AutoField(primary_key=True)
+    nom = models.CharField(max_length=MAX_LENGTH)
+    grau = models.ForeignKey(Degree, on_delete=models.CASCADE)
+    ruta = models.CharField(max_length=MAX_LENGTH,
+                            help_text="Ruta de l'assignatura (sense incloure el grau).",
+                            default="")
+
+    def __str__(self):
+        return self.grau.nom + " - " + self.nom
+
+class ExamType(models.Model):
+    MAX_LENGTH = 200
+    id = models.AutoField(primary_key=True)
+    nom = models.CharField(max_length=MAX_LENGTH)
+
+class DocumentType(models.Model):
+    MAX_LENGTH = 200
+    id = models.AutoField(primary_key=True)
+    nom = models.CharField(max_length=MAX_LENGTH)
+    tipus_examen = models.ForeignKey(ExamType, on_delete=models.CASCADE, null=True, blank=True)
+
 class Upload(models.Model):
     from .utils.queries import list_subjects # Import here to avoid circular importing with Person.
     MAX_LENGTH = 250
@@ -47,6 +80,7 @@ class Upload(models.Model):
         ("primavera", "Primavera"),
         ("tardor", "Tardor"),
     ]
+    '''
     DOCUMENTS = [
         ("apunts", "Apunts"),
         ("examen", "Examen"),
@@ -64,19 +98,24 @@ class Upload(models.Model):
         ("laboratori", "Laboratori"),
         ("reavaluacio", "Reavaluació"),
     ]
-
+    '''
     id = models.AutoField(primary_key=True)
     upload_date = models.DateField(default=timezone.now)
-    grau = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+list(DEGREES_LONG.items()))
-    assignatura = models.CharField(max_length=MAX_LENGTH, blank=True, default="")
+    #grau = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+list(DEGREES_LONG.items()))
+    grau = models.ForeignKey(Degree, on_delete=models.CASCADE)
+    #assignatura = models.CharField(max_length=MAX_LENGTH, blank=True, default="")
+    assignatura = models.ForeignKey(Subject, on_delete=models.CASCADE)
     professor = models.CharField(max_length=MAX_LENGTH, blank=True, default="")
     dni = models.CharField(max_length=MAX_LENGTH)
     alumne = models.CharField(max_length=MAX_LENGTH, blank=True, default="")
     curs = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+YEARS)
     quadrimestre = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+SEMESTER)
-    document = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+DOCUMENTS)
-    parcial_final = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+PARCIAL_FINAL, blank=True, default="")
-    tipus_examen = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+EXAM_TYPES, blank=True, default="")
+    #document = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+DOCUMENTS)
+    document = models.ForeignKey(DocumentType, on_delete=models.CASCADE)
+    #parcial_final = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+PARCIAL_FINAL, blank=True, default="")
+    parcial_final = models.ForeignKey(ExamType, on_delete=models.CASCADE, null=True, blank=True)
+    #tipus_examen = models.CharField(max_length=MAX_LENGTH, choices=EMPTY+EXAM_TYPES, blank=True, default="")
+    tipus_examen = models.ForeignKey(ExamType, on_delete=models.CASCADE, null=True, blank=True)
     solucio = models.BooleanField(default=False)
     file_upload = ContentTypeRestrictedFileField(max_length=MAX_LENGTH, upload_to=change_name, content_types=CONTENT_TYPES, max_upload_size=MAX_FILE_SIZE, null=True, blank=True)
     is_correct = models.BooleanField(default=False)
