@@ -64,7 +64,7 @@ source bin/activate
 
 3. Install Django:
 ```
-pip3 install Django==2.2.9 django-simple-captcha mysqlclient
+pip3 install Django==2.2.9 django-simple-captcha mysqlclient Unidecode
 ```
 
 4. Configure the database:
@@ -85,6 +85,7 @@ mkdir uploader/migrations
 touch uploader/migrations/__init__.py
 python3 manage.py makemigrations
 python3 manage.py migrate
+python3 manage.py collectstatic
 ```
 
 6. Set up a VirtualHost:

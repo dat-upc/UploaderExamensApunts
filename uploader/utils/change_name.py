@@ -15,6 +15,7 @@
 # along with DAT - UploaderExamensApunts. If not, see <https://www.gnu.org/licenses/>.
 #
 from UploaderExamensApunts.constants import *
+import unidecode
 
 def change_name(instance, filename):
     extension = os.path.splitext(filename)[1]
@@ -31,4 +32,4 @@ def change_name(instance, filename):
         name = instance.assignatura.nom + "-y." + instance.curs + "-" + instance.document.nom + "-q." + \
                instance.quadrimestre + "-d." + data + "-p." + instance.professor.replace(" ", "_") + "-a." + \
                instance.alumne.replace(" ", "_") + extension
-    return os.path.join(REL_TMP_DIR, name)
+    return os.path.join(REL_TMP_DIR, unidecode.unidecode(name))
