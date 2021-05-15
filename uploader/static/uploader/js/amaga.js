@@ -15,7 +15,7 @@
 * along with DAT - UploaderExamensApunts. If not, see <https://www.gnu.org/licenses/>.
 */
 function amaga() {
-    $("#examen").hide();
+    $("[id^=exam-]").hide();
     $("[id^=assigG]").hide();
     $("#assignatura").show();
 }

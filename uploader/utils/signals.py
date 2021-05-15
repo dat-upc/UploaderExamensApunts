@@ -19,7 +19,7 @@ from django.dispatch.dispatcher import receiver
 from uploader.models import Upload
 from .change_name import change_name
 from .concurs_capsa import add_points
-from .queries import get_subject_path
+from .queries import get_subject_path, check_dni
 from UploaderExamensApunts.constants import *
 import os
 
@@ -35,10 +35,9 @@ def move_file(sender, instance, **kwargs):
     # Absolute path to the file.
     old_name = os.path.join(MEDIA_ROOT_SAVED, instance.file_upload.name)
     if instance.is_correct:
-        assig_path = get_subject_path(instance.assignatura, instance.grau)
-        new_name = os.path.join(ABS_FINAL_DIR, instance.grau, assig_path, os.path.basename(change_name(instance, os.path.basename(old_name))))
+        new_name = os.path.join(ABS_FINAL_DIR, instance.grau.ruta, instance.assignatura.ruta, os.path.basename(change_name(instance, os.path.basename(old_name))))
         created = False
-        dest_dir = os.path.join(REL_FINAL_DIR, instance.grau, assig_path)
+        dest_dir = os.path.join(REL_FINAL_DIR, instance.grau.ruta, instance.assignatura.ruta)
     else:
         new_name = os.path.join(MEDIA_ROOT_SAVED, change_name(instance, os.path.basename(old_name)))
         created = kwargs.get('created')
@@ -66,5 +65,5 @@ def capsa_points(sender, instance, **kwargs):
     except Upload.DoesNotExist:
         return None
 
-    if instance.is_correct != previous.is_correct:
+    if instance.is_correct != previous.is_correct and check_dni(instance.dni) > 0:
         add_points(instance.document, instance.dni)

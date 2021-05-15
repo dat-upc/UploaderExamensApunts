@@ -19,7 +19,7 @@ var assig_actual;
 
 $("#id_grau").change(function() {
     $("#assignatura").hide();
-    assig_actual = "#" + "assig" + $("#id_grau option:selected").val();
+    assig_actual = "#" + "assigG" + $("#id_grau option:selected").val();
     if ($("#id_grau option:selected").val() == "") $("#assignatura").show();
 
     $(assig_anterior).hide();

@@ -15,15 +15,40 @@
 # along with DAT - UploaderExamensApunts. If not, see <https://www.gnu.org/licenses/>.
 #
 from django.contrib import admin
-from uploader.models import Upload, Person
+from uploader.models import Upload, Person, Degree, Subject, ExamType, DocumentType, ExamWeight
+
+class DegreeAdmin(admin.ModelAdmin):
+    list_display = ('nom_curt', 'nom')
+    exclude = ()
+
+class SubjectAdmin(admin.ModelAdmin):
+    list_display = ('nom', 'grau')
+    exclude = ()
+
+class ExamTypeAdmin(admin.ModelAdmin):
+    list_display = ('nom',)
+    exclude = ()
+
+class ExamWeightAdmin(admin.ModelAdmin):
+    list_display = ('nom',)
+    exclude = ()
+
+class DocumentTypeAdmin(admin.ModelAdmin):
+    list_display = ('nom',)
+    exclude = ()
 
 class UploadAdmin(admin.ModelAdmin):
-    list_display = ('upload_date', 'grau', 'file_upload', 'is_correct')
+    list_display = ('upload_date', 'grau', 'assignatura', 'file_upload', 'is_correct')
     exclude = ()
 
 class PersonAdmin(admin.ModelAdmin):
     list_display = ('nom', 'dni', 'email')
     exclude = ()
 
+admin.site.register(Degree, DegreeAdmin)
+admin.site.register(Subject, SubjectAdmin)
+admin.site.register(ExamType, ExamTypeAdmin)
+admin.site.register(ExamWeight, ExamWeightAdmin)
+admin.site.register(DocumentType, DocumentTypeAdmin)
 admin.site.register(Upload, UploadAdmin)
 admin.site.register(Person, PersonAdmin)

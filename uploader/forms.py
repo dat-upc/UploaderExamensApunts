@@ -18,16 +18,15 @@ from django import forms
 from .models import Upload, Person
 from captcha.fields import CaptchaField
 from UploaderExamensApunts.constants import *
+from .utils.queries import get_degrees
 
 class UploadForm(forms.ModelForm):
     captcha = CaptchaField()
-    for d in DEGREES:
-        exec("assig" + d + " = forms.CharField()")
 
     class Meta:
         model = Upload
         fields = ["grau", "assignatura", "professor", "dni", "curs", "quadrimestre", "document", "parcial_final",
-                  "tipus_examen", "solucio", "file_upload", "captcha", "alumne"] + ["assig" + d for d in DEGREES]
+                  "tipus_examen", "solucio", "file_upload", "captcha", "alumne"]
 
 
 class SignUpForm(forms.ModelForm):

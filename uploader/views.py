@@ -17,30 +17,31 @@
 from django.shortcuts import render
 from uploader.forms import UploadForm, SignUpForm
 from UploaderExamensApunts.constants import *
-from .utils.queries import check_dni, get_name, list_subjects
-from .utils.get_assignatura import get_assignatura
+from .utils.queries import check_dni, get_name, list_subjects, get_degrees, get_document_type_id
 
 def index(request):
     form = UploadForm()
+    degrees = get_degrees()
     subjects = {}
-    for d in DEGREES.keys():
-        subjects[d] = list_subjects(d)
+    for d in degrees:
+        subjects[d.id] = list_subjects(d)
     return render(request, 'uploader/form.html', {'form': form, 'MAX_FILE_SIZE': MAX_FILE_SIZE//1024//1024,
                                                   "content_types": [i.split('/')[1] for i in CONTENT_TYPES if '/' in i],
-                                                  "degrees": DEGREES.keys(),
+                                                  "degrees": degrees,
                                                   "subjects": subjects,
+                                                  "exam_id": get_document_type_id("Examen")
                                                   })
 
 def upload(request):
     if request.method == "POST":
         form = UploadForm(request.POST, request.FILES)
+        print(form)
         if form.is_valid():
             if not check_dni(form.cleaned_data["dni"]):
                 return render(request, 'uploader/error.html', {'error': "El DNI/NIE introduït no està registrat.",
                                                                "error_info": form.errors})
             upload = form.save(commit=False) # Save the form but don't send it to the DB.
             upload.alumne = get_name(upload.dni)
-            upload.assignatura = get_assignatura(form.cleaned_data)
             upload.save() # Now send it to the DB.
             return render(request, 'uploader/success.html') # Say thank you to the uploader.
         else:

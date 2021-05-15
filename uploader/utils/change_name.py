@@ -28,7 +28,7 @@ def change_name(instance, filename):
             name = name + "-s"
         name = name + extension
     else:
-        name = instance.assignatura + "-y." + instance.curs + "-" + instance.document + "-q." + \
+        name = instance.assignatura.nom + "-y." + instance.curs + "-" + instance.document.nom + "-q." + \
                instance.quadrimestre + "-d." + data + "-p." + instance.professor.replace(" ", "_") + "-a." + \
                instance.alumne.replace(" ", "_") + extension
     return os.path.join(REL_TMP_DIR, name)
